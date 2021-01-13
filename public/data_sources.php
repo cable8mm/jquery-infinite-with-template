@@ -1,0 +1,32 @@
+<?php
+
+$response['data'] = [];
+
+$query = $_GET['word'] ?? 'None';
+
+for ($i = 0; $i < 20; $i++) {
+    $response['data'][] = faker($query);
+}
+
+header('Content-Type: application/json');
+
+echo json_encode($response);
+
+function faker($query)
+{
+    return [
+        'id' => rand(1, 1000),
+        'title' => generateRandomString(30)."(word=$query)",
+    ];
+}
+
+function generateRandomString($length = 10)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
