@@ -44,9 +44,10 @@
               var html = tmpl.render(item);
               $(html).appendTo($this);
             });
+
+            currentScrollPage += 1;
           }
 
-          currentScrollPage += 1;
           scrollTriggered = false;
         }
       );
