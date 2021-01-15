@@ -41,6 +41,10 @@
         function (result) {
           if (result) {
             $.each(result["data"], function (_, item) {
+              if (opts.templateHelpers) {
+                item = Object.assign(item, opts.templateHelpers);
+              }
+
               var html = tmpl.render(item);
               $(html).appendTo($this);
             });
@@ -63,5 +67,6 @@
     dataPath: null,
     templateSelector: null,
     query: null,
+    templateHelpers: null,
   };
 })(jQuery);
