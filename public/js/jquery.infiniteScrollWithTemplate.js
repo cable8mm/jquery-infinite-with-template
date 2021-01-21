@@ -36,9 +36,10 @@
 
       var query = opts.query ? "&" + opts.query : "";
 
-      $.get(
-        opts.dataPath + "?page=" + currentScrollPage + query,
-        function (result) {
+      $.ajax({
+        url: opts.dataPath + "?page=" + currentScrollPage + query,
+        method: opts.method,
+        success: function (result) {
           if (result) {
             $.each(result["data"], function (_, item) {
               if (opts.templateHelpers) {
@@ -53,8 +54,8 @@
           }
 
           scrollTriggered = false;
-        }
-      );
+        },
+      });
     }
 
     triggerDataLoad();
@@ -67,6 +68,7 @@
     dataPath: null,
     templateSelector: null,
     query: null,
+    method: "GET",
     templateHelpers: null,
   };
 })(jQuery);

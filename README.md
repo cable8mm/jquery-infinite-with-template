@@ -91,10 +91,12 @@ Result:
 
 ## Options
 
-**templateSelector** - jsRender template identify
+**templateSelector** - (required) jsRender template identify
 
-**templateHelpers** - Merge with json to load
+**dataPath** - (required) URL to load more data via AJAX
 
-**dataPath** - URL to load more data via AJAX
+**templateHelpers** - (optional) Merge with json to load
 
-**query** - Additional query
+**query** - (optional) Additional query
+
+**method** - (optional) GET(default), POST, PUT, DELETE.
