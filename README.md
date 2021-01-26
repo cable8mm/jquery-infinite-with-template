@@ -99,4 +99,8 @@ Result:
 
 **query** - (optional) Additional query
 
-**method** - (optional) GET(default), POST, PUT, DELETE.
+**method** - (optional) GET(default), POST, PUT, DELETE
+
+**loadAtStart** - (optional) true(default), false
+
+**loadSelector** - (optional) if it set, it load more data every time the selector clicked

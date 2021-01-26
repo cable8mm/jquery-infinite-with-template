@@ -1,7 +1,9 @@
 /**
- * Your plugin name and a small description
+ * jQuery Infinite With Template Plugin
+ * JQuery plugin for ajax-enabled infinite page scroll with template.
+ *
  * Author: Sam Lee (https://github.com/cable8mm)
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 
 (function ($) {
@@ -16,14 +18,20 @@
     var currentScrollPage = 0;
     var scrollTriggered = false;
 
-    $(window).on("scroll", function () {
-      if (
-        $(this).scrollTop() >
-        $(document.body).height() - $(this).height() * 2
-      ) {
+    if (opts.loadSelector) {
+      $(document).on("click", opts.loadSelector, function () {
         triggerDataLoad();
-      }
-    });
+      });
+    } else {
+      $(window).on("scroll", function () {
+        if (
+          $(this).scrollTop() >
+          $(document.body).height() - $(this).height() * 2
+        ) {
+          triggerDataLoad();
+        }
+      });
+    }
 
     function triggerDataLoad() {
       if (scrollTriggered) {
@@ -58,7 +66,9 @@
       });
     }
 
-    triggerDataLoad();
+    if (opts.loadAtStart) {
+      triggerDataLoad();
+    }
 
     return this;
   };
@@ -70,5 +80,7 @@
     query: null,
     method: "GET",
     templateHelpers: null,
+    loadAtStart: true,
+    loadSelector: null,
   };
 })(jQuery);
