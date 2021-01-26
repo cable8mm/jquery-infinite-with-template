@@ -1,4 +1,9 @@
+#!/usr/bin/env php
 <?php
+
+/**
+ * @example ./generate > data_sources.ajax generate new data sources
+ */
 
 $response['data'] = [];
 
@@ -10,7 +15,7 @@ for ($i = 0; $i < 20; $i++) {
 
 header('Content-Type: application/json');
 
-echo json_encode($response);
+echo json_encode($response, JSON_PRETTY_PRINT);
 
 function faker($query)
 {

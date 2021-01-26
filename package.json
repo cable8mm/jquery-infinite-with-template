@@ -1,0 +1,29 @@
+{
+  "name": "@cable8mm/jquery-infinite-with-template",
+  "version": "1.0.0",
+  "title": "jQuery Infinite With Template",
+  "description": "JQuery plugin for ajax-enabled infinite page scroll with template. If you like jQuery until now, this little library will help.",
+  "main": "jquery.infiniteScrollWithTemplate.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cable8mm/jquery-infinite-with-template.git"
+  },
+  "keywords": [
+    "infinite",
+    "scroll",
+    "jquery",
+    "template"
+  ],
+  "author": {
+    "name": "Sam Lee",
+    "url": "https://github.com/cable8mm"
+  },
+  "dependencies": {
+    "jsrender": ">= 1.0.0"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cable8mm/jquery-infinite-with-template/issues"
+  },
+  "homepage": "https://github.com/cable8mm/jquery-infinite-with-template#readme"
+}

@@ -3,18 +3,30 @@ jQuery Infinite With Template Plugin
 
 JQuery plugin for ajax-enabled infinite page scroll with template.
 
-If you like Laravel and jQuery until now, this little library will help.
+If you like jQuery until now, this little library will help.
 
 ## Demo
 
-For convinient Laravel Valet need:
+For convinient `http-server` need:
 
 ```bash
-cd ~/Sites
-git clone https://github.com/cable8mm/jquery-infinite-with-template.git
+git clone https://github.com/cable8mm/jquery-infinite-with-template
+
+cd jquery-infinite-with-template
+
+http-server .
 ```
 
-and visit https://jquery-infinite-with-template.test
+and visit http://127.0.0.1:8080
+
+If you are not installed `http-server`, refer to https://www.npmjs.com/package/http-server
+
+You can regenerate data_sources:
+
+```bash
+# permission required
+./examples/generate > data_sources.ajax
+```
 
 ## Usage sample
 
@@ -23,7 +35,7 @@ Javascript part:
 ```Javascript
 $("#result").infiniteTemplate({
 	templateSelector: "#test-tmpl",
-	dataPath: "data_sources.php",
+	dataPath: "data_sources.ajax",
 	query: "word=ajax",
 	templateHelpers: {
 		authId : 354

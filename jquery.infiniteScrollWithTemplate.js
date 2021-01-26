@@ -33,6 +33,13 @@
       });
     }
 
+    var toType = function (obj) {
+      return {}.toString
+        .call(obj)
+        .match(/\s([a-zA-Z]+)/)[1]
+        .toLowerCase();
+    };
+
     function triggerDataLoad() {
       if (scrollTriggered) {
         return;
@@ -48,6 +55,12 @@
         url: opts.dataPath + "?page=" + currentScrollPage + query,
         method: opts.method,
         success: function (result) {
+          console.log(toType(result));
+
+          if ("string" == typeof result) {
+            result = JSON.parse(result);
+          }
+
           if (result) {
             $.each(result["data"], function (_, item) {
               if (opts.templateHelpers) {
