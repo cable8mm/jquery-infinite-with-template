@@ -116,3 +116,5 @@ Result:
 **loadAtStart** - (optional) true(default), false
 
 **loadSelector** - (optional) if it set, it load more data every time the selector clicked
+
+**initialPage** - (optional) 1(default)

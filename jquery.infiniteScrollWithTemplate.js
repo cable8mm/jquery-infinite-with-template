@@ -15,7 +15,7 @@
 
     var opts = $.extend({}, $.fn.infiniteTemplate.defaults, settings);
 
-    var currentScrollPage = 0;
+    var currentScrollPage = opts.initialPage;
     var scrollTriggered = false;
 
     if (opts.loadSelector) {
@@ -95,5 +95,6 @@
     templateHelpers: null,
     loadAtStart: true,
     loadSelector: null,
+    initialPage: 1,
   };
 })(jQuery);
