@@ -17,7 +17,7 @@ cd jquery-infinite-with-template
 http-server .
 ```
 
-and visit http://127.0.0.1:8080
+and visit http://127.0.0.1:8080/examples/
 
 If you are not installed `http-server`, refer to https://www.npmjs.com/package/http-server
 
@@ -53,7 +53,7 @@ HTML part:
 </script>
 ```
 
-AJAX part: `data_sources.php`. This should return Ajax:
+AJAX part: `data_sources.ajax`. This should return Ajax:
 
 ```javascript
 {
@@ -118,3 +118,95 @@ Result:
 **loadSelector** - (optional) if it set, it load more data every time the selector clicked
 
 **initialPage** - (optional) 1(default)
+
+**preventCache** - (optional) false(default) if true, Add timestamp
+
+## Examples
+
+```html
+// https://m.holapet.com/adoption
+
+<x-adoption.rounded-card-list :selector="'adoption-rounded-card-list'">
+    @foreach($adoptions as $item)
+    <x-adoption.rounded-card :item="$item" />
+    @endforeach
+</x-adoption.rounded-card-list>
+<x-adoption.rounded-card-tmpl />
+<script>
+    $("#adoption-rounded-card-list").infiniteTemplate({
+        templateSelector: "#adoption-rounded-card-tmpl",
+        dataPath: "/api/adoption",
+        initialPage: 3,
+    });
+</script>
+```
+
+```html
+// https://m.holapet.com/place/pensions/region/1
+
+<x-place.rounded-card-list :selector="'place-rounded-card-list'">
+    @foreach($region->placesRecent as $item)
+    <x-place.rounded-card :item="$item" />
+    @endforeach
+</x-place.rounded-card-list>
+<x-place.rounded-card-tmpl />
+<script>
+    $("#place-rounded-card-list").infiniteTemplate({
+        templateSelector: "#place-rounded-card-tmpl",
+        dataPath: "/api/place/pensions/region/{{ $region->id }}",
+        initialPage: 3,
+        templateHelpers: {
+            minColumnCount: 1
+        }
+    });
+</script>
+```
+
+```html
+// https://m.holapet.com/search/show?word=%ED%8F%AC%EB%A9%94%EB%9D%BC%EB%8B%88%EC%95%88
+
+@include('shared.jtemplate.search-user')
+
+@auth
+<script>
+    $("#user-list").infiniteTemplate({
+        templateSelector: "#user-tmpl",
+        dataPath: "/api/user",
+        query: "word={{ $word }}",
+        templateHelpers: {
+            authId : {{ Auth::id() ?? 0 }},
+            followeeIds: {!! Auth::user()->followee_ids->toJson() ?? 'false' !!}
+        }
+    });
+</script>
+@endauth
+@guest
+<script>
+    $("#user-list").infiniteTemplate({
+        templateSelector: "#user-tmpl",
+        dataPath: "/api/user",
+        query: "word={{ $word }}",
+    });
+</script>
+@endguest
+```
+
+```html
+// https://m.holapet.com/story/hot
+
+@if(!empty($hotStories))
+<x-story.grid-card-list :selector="'story-grid-card-list'">
+    @foreach($hotStories as $item)
+    <x-story.grid-card :item="$item" />
+    @endforeach
+</x-story.grid-card-list>
+@endif
+<x-story.grid-card-tmpl />
+<script>
+    $("#story-grid-card-list").infiniteTemplate({
+        templateSelector: "#story-grid-card-tmpl",
+        dataPath: "/api/story/hot",
+        initialPage: 3,
+    });
+</script>
+```

@@ -3,7 +3,7 @@
  * JQuery plugin for ajax-enabled infinite page scroll with template.
  *
  * Author: Sam Lee (https://github.com/cable8mm)
- * Version: 1.0.1
+ * Version: 1.0.2
  */
 
 (function ($) {
@@ -17,6 +17,7 @@
 
     var currentScrollPage = opts.initialPage;
     var scrollTriggered = false;
+    var isFinished = false;
 
     if (opts.loadSelector) {
       $(document).on("click", opts.loadSelector, function () {
@@ -26,22 +27,16 @@
       $(window).on("scroll", function () {
         if (
           $(this).scrollTop() >
-          $(document.body).height() - $(this).height() * 2
+            $(document.body).height() - $(this).height() * 2 &&
+          !isFinished
         ) {
           triggerDataLoad();
         }
       });
     }
 
-    var toType = function (obj) {
-      return {}.toString
-        .call(obj)
-        .match(/\s([a-zA-Z]+)/)[1]
-        .toLowerCase();
-    };
-
     function triggerDataLoad() {
-      if (scrollTriggered) {
+      if (scrollTriggered || isFinished) {
         return;
       }
 
@@ -51,27 +46,31 @@
 
       var query = opts.query ? "&" + opts.query : "";
 
+      var timestamp = opts.preventCache ? "&t=" + new Date().getTime() : "";
+
       $.ajax({
-        url: opts.dataPath + "?page=" + currentScrollPage + query,
+        url: opts.dataPath + "?page=" + currentScrollPage + query + timestamp,
         method: opts.method,
         success: function (result) {
-          console.log(toType(result));
-
           if ("string" == typeof result) {
             result = JSON.parse(result);
           }
 
           if (result) {
-            $.each(result["data"], function (_, item) {
-              if (opts.templateHelpers) {
-                item = Object.assign(item, opts.templateHelpers);
-              }
+            if (result["data"].length == 0) {
+              isFinished = true;
+            } else {
+              $.each(result["data"], function (_, item) {
+                if (opts.templateHelpers) {
+                  item = Object.assign(item, opts.templateHelpers);
+                }
 
-              var html = tmpl.render(item);
-              $(html).appendTo($this);
-            });
+                var html = tmpl.render(item);
+                $(html).appendTo($this);
+              });
 
-            currentScrollPage += 1;
+              currentScrollPage += 1;
+            }
           }
 
           scrollTriggered = false;
@@ -96,5 +95,6 @@
     loadAtStart: true,
     loadSelector: null,
     initialPage: 1,
+    preventCache: false,
   };
 })(jQuery);
