@@ -20,6 +20,9 @@
           templateSelector: "#test-tmpl",
           dataPath: "data_sources.ajax",
           query: "word=ajax",
+          zeroCallback: function () {
+            alert("zero alert");
+          },
         });
       });
     </script>

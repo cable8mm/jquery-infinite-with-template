@@ -1,6 +1,6 @@
 {
   "name": "@cable8mm/jquery-infinite-with-template",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "title": "jQuery Infinite With Template",
   "description": "JQuery plugin for ajax-enabled infinite page scroll with template. If you like jQuery until now, this little library will help.",
   "main": "jquery.infiniteScrollWithTemplate.js",

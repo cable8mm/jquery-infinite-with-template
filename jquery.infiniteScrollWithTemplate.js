@@ -52,15 +52,24 @@
         url: opts.dataPath + "?page=" + currentScrollPage + query + timestamp,
         method: opts.method,
         success: function (result) {
-          if ("string" == typeof result) {
+          if (typeof result === "string") {
             result = JSON.parse(result);
           }
 
           if (result) {
-            if (result["data"].length == 0) {
+            if (result[opts.key].length == 0) {
               isFinished = true;
+
+              // if zero, call zeroCallback
+              console.log(currentScrollPage + " " + opts.zeroCallback);
+              if (
+                currentScrollPage == 1 &&
+                typeof opts.zeroCallback === "function"
+              ) {
+                opts.zeroCallback();
+              }
             } else {
-              $.each(result["data"], function (_, item) {
+              $.each(result[opts.key], function (_, item) {
                 if (opts.templateHelpers) {
                   item = Object.assign(item, opts.templateHelpers);
                 }
@@ -90,11 +99,13 @@
     dataPath: null,
     templateSelector: null,
     query: null,
+    key: "data",
     method: "GET",
     templateHelpers: null,
     loadAtStart: true,
     loadSelector: null,
     initialPage: 1,
     preventCache: false,
+    zeroCallback: null,
   };
 })(jQuery);

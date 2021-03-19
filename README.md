@@ -39,7 +39,10 @@ $("#result").infiniteTemplate({
 	query: "word=ajax",
 	templateHelpers: {
 		authId : 354
-	}
+	},
+    zeroCallback: function () {
+        alert("zero alert");
+    },
 });
 ```
 
@@ -109,6 +112,8 @@ Result:
 
 **templateHelpers** - (optional) Merge with json to load
 
+**key** - (optional) data(default)
+
 **query** - (optional) Additional query
 
 **method** - (optional) GET(default), POST, PUT, DELETE
@@ -120,6 +125,8 @@ Result:
 **initialPage** - (optional) 1(default)
 
 **preventCache** - (optional) false(default) if true, Add timestamp
+
+**zeroCallback** - (optional) null(default) if function, call zeroCallback when result is nothing
 
 ## Examples
 
