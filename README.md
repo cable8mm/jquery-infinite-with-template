@@ -1,9 +1,36 @@
 jQuery Infinite With Template Plugin
-======================
+
+![NPM Version](https://img.shields.io/npm/v/%40cable8mm%2Fjquery-infinite-with-template)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40cable8mm%2Fjquery-infinite-with-template)
+![NPM Downloads](https://img.shields.io/npm/dt/%40cable8mm%2Fjquery-infinite-with-template)
+![jsDelivr hits (npm)](https://img.shields.io/jsdelivr/npm/hy/%40cable8mm%2Fjquery-infinite-with-template)
+![NPM Type Definitions](https://img.shields.io/npm/types/%40cable8mm%2Fjquery-infinite-with-template)
+![NPM License](https://img.shields.io/npm/l/%40cable8mm%2Fjquery-infinite-with-template)
+
 
 JQuery plugin for ajax-enabled infinite page scroll with template.
 
 If you like jQuery until now, this little library will help.
+
+## Install
+
+on npm
+
+```sh
+npm i @cable8mm/jquery-infinite-with-template
+```
+
+on html
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.3/jquery.infiniteScrollWithTemplate.min.js" integrity="sha256-bX3iyCp0T50YmDRgpUl1tY/LGlpPGsKR4TqUkpcq6WA=" crossorigin="anonymous"></script>
+```
+
+on ESM
+
+```html
+<script type="module"> import @cable8mm/jquery-infinite-with-template from https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.3/+esm </script>
+```
 
 ## Demo
 
@@ -217,3 +244,5 @@ Result:
     });
 </script>
 ```
+
+The jQuery Infinite With Template Plugin project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
