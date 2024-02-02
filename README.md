@@ -23,13 +23,13 @@ npm i @cable8mm/jquery-infinite-with-template
 on html
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.3/jquery.infiniteScrollWithTemplate.min.js" integrity="sha256-bX3iyCp0T50YmDRgpUl1tY/LGlpPGsKR4TqUkpcq6WA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.4/jquery.infiniteScrollWithTemplate.min.js" integrity="sha256-bX3iyCp0T50YmDRgpUl1tY/LGlpPGsKR4TqUkpcq6WA=" crossorigin="anonymous"></script>
 ```
 
 on ESM
 
 ```html
-<script type="module"> import @cable8mm/jquery-infinite-with-template from https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.3/+esm </script>
+<script type="module"> import @cable8mm/jquery-infinite-with-template from https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.4/+esm </script>
 ```
 
 ## Demo
