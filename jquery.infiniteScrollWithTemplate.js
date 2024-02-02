@@ -3,7 +3,7 @@
  * JQuery plugin for ajax-enabled infinite page scroll with template.
  *
  * Author: Sam Lee (https://github.com/cable8mm)
- * Version: 1.0.2
+ * Version: 1.0.4
  */
 
 (function ($) {
