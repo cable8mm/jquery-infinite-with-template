@@ -1,4 +1,4 @@
-jQuery Infinite With Template Plugin
+# jQuery Infinite With Template Plugin
 
 ![NPM Version](https://img.shields.io/npm/v/%40cable8mm%2Fjquery-infinite-with-template)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40cable8mm%2Fjquery-infinite-with-template)
