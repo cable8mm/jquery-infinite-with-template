@@ -1,5 +1,12 @@
 jQuery Infinite With Template Plugin
-======================
+
+![NPM Version](https://img.shields.io/npm/v/%40cable8mm%2Fjquery-infinite-with-template)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40cable8mm%2Fjquery-infinite-with-template)
+![NPM Downloads](https://img.shields.io/npm/dt/%40cable8mm%2Fjquery-infinite-with-template)
+![jsDelivr hits (npm)](https://img.shields.io/jsdelivr/npm/hy/%40cable8mm%2Fjquery-infinite-with-template)
+![NPM Type Definitions](https://img.shields.io/npm/types/%40cable8mm%2Fjquery-infinite-with-template)
+![NPM License](https://img.shields.io/npm/l/%40cable8mm%2Fjquery-infinite-with-template)
+
 
 JQuery plugin for ajax-enabled infinite page scroll with template.
 
