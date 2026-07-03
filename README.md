@@ -53,6 +53,12 @@ npm i @cable8mm/jquery-infinite-with-template
 
 ## 🎬 Demo
 
+### Online Demo
+
+You can test the plugin directly in your browser:
+
+👉 **[https://www.palgle.com/jquery-infinite-with-template/examples/index.html](https://www.palgle.com/jquery-infinite-with-template/examples/index.html)**
+
 ### Quick Start
 
 #### Using npm run dev (Recommended)
@@ -253,7 +259,7 @@ $("#search-results").infiniteTemplate({
 
 ## 🏗️ Project Structure
 
-```
+```text
 jquery-infinite-with-template/
 ├── jquery.infiniteScrollWithTemplate.js  # Main plugin (unminified)
 ├── jquery.infiniteScrollWithTemplate.min.js  # Minified version
