@@ -29,7 +29,8 @@
       $(window).on("scroll" + namespace, function () {
         if (
           $(this).scrollTop() >
-            $(document.body).height() - $(this).height() * 2 &&
+            $(document.body).height() -
+              $(window).height() * (opts.scrollThreshold || 2) &&
           !isFinished
         ) {
           triggerDataLoad();
@@ -44,14 +45,16 @@
 
       scrollTriggered = true;
 
+      if (typeof opts.loadingCallback === "function") {
+        opts.loadingCallback();
+      }
+
       var tmpl = $.templates(opts.templateSelector);
 
-      var query = opts.query ? "&" + opts.query : "";
-
-      var timestamp = opts.preventCache ? "&t=" + new Date().getTime() : "";
+      var url = buildUrl(opts.dataPath, currentScrollPage);
 
       $.ajax({
-        url: opts.dataPath + "?page=" + currentScrollPage + query + timestamp,
+        url: url,
         method: opts.method,
         success: function (result) {
           if (typeof result === "string") {
@@ -79,14 +82,19 @@
                 opts.zeroCallback();
               }
             } else {
+              var fragment = document.createDocumentFragment();
+
               $.each(result[opts.key], function (_, item) {
                 if (opts.templateHelpers) {
                   item = Object.assign(item, opts.templateHelpers);
                 }
 
                 var html = tmpl.render(item);
-                $(html).appendTo($this);
+                var $html = $(html);
+                fragment.appendChild($html[0]);
               });
+
+              $this.append(fragment);
 
               currentScrollPage += 1;
             }
@@ -101,7 +109,33 @@
             opts.errorCallback(error);
           }
         },
+        complete: function () {
+          if (typeof opts.loadedCallback === "function") {
+            opts.loadedCallback();
+          }
+        },
       });
+    }
+
+    function buildUrl(baseUrl, page) {
+      var url = new URL(baseUrl, window.location.origin);
+      url.searchParams.set("page", page);
+
+      if (opts.query) {
+        var queryParams = opts.query.split("&");
+        $.each(queryParams, function (_, param) {
+          var keyValue = param.split("=");
+          if (keyValue.length === 2) {
+            url.searchParams.set(keyValue[0], keyValue[1]);
+          }
+        });
+      }
+
+      if (opts.preventCache) {
+        url.searchParams.set("t", new Date().getTime());
+      }
+
+      return url.toString();
     }
 
     if (opts.loadAtStart) {
@@ -125,5 +159,8 @@
     preventCache: false,
     zeroCallback: null,
     errorCallback: null,
+    loadingCallback: null,
+    loadedCallback: null,
+    scrollThreshold: 2,
   };
 })(jQuery);
