@@ -27,10 +27,13 @@
     "jest-environment-jsdom": "^29.7.0",
     "@types/jest": "^29.5.0",
     "jquery": "^3.7.0",
-    "jsrender": "^1.0.10"
+    "jsrender": "^1.0.10",
+    "terser": "^5.19.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "terser jquery.infiniteScrollWithTemplate.js -o jquery.infiniteScrollWithTemplate.min.js -c -m",
+    "minify": "npm run build"
   },
   "license": "MIT",
   "bugs": {
