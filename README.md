@@ -55,24 +55,29 @@ npm i @cable8mm/jquery-infinite-with-template
 
 ### Quick Start
 
+#### Using npm run dev (Recommended)
+
 ```bash
-# Clone the repository
-git clone https://github.com/cable8mm/jquery-infinite-with-template.git
+# Install dependencies (one-time)
+npm install
 
-# Navigate to project
-cd jquery-infinite-with-template
-
-# Start local server
-http-server .
+# Run development server with auto-open
+npm run dev
 ```
 
-Visit [http://127.0.0.1:8080/examples/](http://127.0.0.1:8080/examples/) in your browser.
+**Note:** This will start the server at `http://127.0.0.1:8080/examples/index.html` and automatically open it in your browser.
+
+Visit [http://127.0.0.1:8080/examples/index.html](http://127.0.0.1:8080/examples/index.html) in your browser.
 
 ### Regenerate Demo Data
 
 ```bash
-# Permission required
-./examples/generate > data_sources.json
+# Using PHP CLI
+php examples/generate > examples/data_sources.json
+
+# Or if you have the generate script in examples directory
+cd examples
+php generate > data_sources.json
 ```
 
 ## 🚀 Usage
