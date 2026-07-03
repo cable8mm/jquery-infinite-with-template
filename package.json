@@ -22,6 +22,16 @@
   "dependencies": {
     "jsrender": ">= 1.0.0"
   },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "@types/jest": "^29.5.0",
+    "jquery": "^3.7.0",
+    "jsrender": "^1.0.10"
+  },
+  "scripts": {
+    "test": "jest"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cable8mm/jquery-infinite-with-template/issues"

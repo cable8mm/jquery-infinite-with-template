@@ -93,7 +93,7 @@
                 opts.zeroCallback();
               }
             } else {
-              var fragment = document.createDocumentFragment();
+              var htmlContent = "";
 
               $.each(result[opts.key], function (_, item) {
                 if (opts.templateHelpers) {
@@ -101,11 +101,10 @@
                 }
 
                 var html = tmpl.render(item);
-                var $html = $(html);
-                fragment.appendChild($html[0]);
+                htmlContent += html;
               });
 
-              $this.append(fragment);
+              $this.append(htmlContent);
 
               currentScrollPage += 1;
             }

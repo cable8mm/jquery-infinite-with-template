@@ -2,7 +2,7 @@
 <?php
 
 /**
- * @example ./generate > data_sources.ajax generate new data sources
+ * @example ./generate > data_sources.json generate new data sources
  */
 
 $response['data'] = [];

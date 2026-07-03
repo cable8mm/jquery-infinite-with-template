@@ -57,7 +57,7 @@ You can regenerate data_sources:
 
 ```bash
 # permission required
-./examples/generate > data_sources.ajax
+./examples/generate > data_sources.json
 ```
 
 ## Usage sample
@@ -67,7 +67,7 @@ Javascript part:
 ```javascript
 $("#result").infiniteTemplate({
   templateSelector: "#test-tmpl",
-  dataPath: "data_sources.ajax",
+  dataPath: "data_sources.json",
   query: "word=ajax",
   templateHelpers: {
     authId: 354,
@@ -88,7 +88,7 @@ HTML part:
 </script>
 ```
 
-AJAX part: `data_sources.ajax`. This should return Ajax:
+AJAX part: `data_sources.json`. This should return Ajax:
 
 ```javascript
 {
