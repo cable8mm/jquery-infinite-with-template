@@ -33,8 +33,9 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "terser jquery.infiniteScrollWithTemplate.js -o jquery.infiniteScrollWithTemplate.min.js -c -m",
-    "minify": "npm run build",
+    "minify": "terser jquery.infiniteScrollWithTemplate.js -o jquery.infiniteScrollWithTemplate.min.js -c -m",
+    "build": "npm run minify && node scripts/prepare-dist.js",
+    "prepare-dist": "node scripts/prepare-dist.js",
     "dev": "http-server . -p 8080 -o /examples/index.html",
     "serve": "http-server . -p 8080"
   },
