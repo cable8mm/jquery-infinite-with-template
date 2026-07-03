@@ -138,7 +138,7 @@ Result:
 
 ## Options
 
-**templateSelector** - (required) jsRender template identify
+**templateSelector** - (required) jsRender template selector
 
 **dataPath** - (required) URL to load more data via AJAX
 
@@ -146,7 +146,7 @@ Result:
 
 **key** - (optional) data(default)
 
-**query** - (optional) Additional query
+**query** - (optional) Additional query parameters
 
 **method** - (optional) GET(default), POST, PUT, DELETE
 
@@ -159,6 +159,14 @@ Result:
 **preventCache** - (optional) false(default) if true, Add timestamp
 
 **zeroCallback** - (optional) null(default) if function, call zeroCallback when result is nothing
+
+**errorCallback** - (optional) null(default) if function, call errorCallback when AJAX or JSON parse error occurs
+
+**loadingCallback** - (optional) null(default) if function, call loadingCallback when loading starts
+
+**loadedCallback** - (optional) null(default) if function, call loadedCallback when loading completes (success or error)
+
+**scrollThreshold** - (optional) 2(default) multiplier for viewport height to determine when to load more data
 
 ## Examples
 

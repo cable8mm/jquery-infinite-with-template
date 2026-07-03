@@ -15,6 +15,17 @@
 
     var opts = $.extend({}, $.fn.infiniteTemplate.defaults, settings);
 
+    // Validate required options
+    if (!opts.templateSelector) {
+      console.error("infiniteTemplate: templateSelector is required");
+      return $this;
+    }
+
+    if (!opts.dataPath) {
+      console.error("infiniteTemplate: dataPath is required");
+      return $this;
+    }
+
     var currentScrollPage = opts.initialPage;
     var scrollTriggered = false;
     var isFinished = false;
