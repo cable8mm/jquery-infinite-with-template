@@ -2,36 +2,80 @@
 <?php
 
 /**
- * @example ./generate > data_sources.json generate new data sources
+ * jQuery Infinite With Template - Demo Data Generator
+ * 
+ * @example ./generate > data_sources.json
+ * @description Generates random demo data for testing infinite scroll
  */
 
-$response['data'] = [];
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
 
-$query = $_GET['word'] ?? 'None';
-
-for ($i = 0; $i < 20; $i++) {
-    $response['data'][] = faker($query);
-}
-
+// Set JSON header
 header('Content-Type: application/json');
 
-echo json_encode($response, JSON_PRETTY_PRINT);
+// Get query parameter (default to 'None' if not provided)
+$query = isset($_GET['word']) ? $_GET['word'] : 'None';
 
-function faker($query)
+// Generate response
+$response = [
+    'data' => [],
+    'page' => isset($_GET['page']) ? (int)$_GET['page'] : 1,
+    'total' => 100 // Simulate total count
+];
+
+// Generate 20 items per page
+$itemsPerPage = 20;
+for ($i = 0; $i < $itemsPerPage; $i++) {
+    $response['data'][] = generateItem($query, $response['page'], $i);
+}
+
+// Output JSON
+echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+/**
+ * Generate a single fake item
+ * 
+ * @param string $query Search query
+ * @param int $page Current page number
+ * @param int $index Item index within page
+ * @return array Generated item
+ */
+function generateItem($query, $page, $index)
 {
+    static $usedIds = [];
+    
+    // Generate unique ID
+    do {
+        $id = rand(1, 10000);
+    } while (in_array($id, $usedIds));
+    
+    $usedIds[] = $id;
+    
     return [
-        'id' => rand(1, 1000),
-        'title' => generateRandomString(30)."(word=$query)",
+        'id' => $id,
+        'title' => generateRandomString(30) . "(word=$query, page=$page)",
+        'page' => $page,
+        'index' => $index
     ];
 }
 
+/**
+ * Generate random string of specified length
+ * 
+ * @param int $length String length
+ * @return string Random string
+ */
 function generateRandomString($length = 10)
 {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
+    
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
+    
     return $randomString;
 }

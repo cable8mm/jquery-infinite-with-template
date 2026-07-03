@@ -1,0 +1,4 @@
+{
+  "intelephense.files.exclude": ["**/examples/generate"],
+  "intelephense.environment.includePaths": ["./node_modules"]
+}
