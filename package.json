@@ -4,6 +4,7 @@
   "title": "jQuery Infinite With Template",
   "description": "JQuery plugin for ajax-enabled infinite page scroll with template. If you like jQuery until now, this little library will help.",
   "main": "jquery.infiniteScrollWithTemplate.js",
+  "types": "jquery.infiniteScrollWithTemplate.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cable8mm/jquery-infinite-with-template.git"
@@ -20,6 +21,22 @@
   },
   "dependencies": {
     "jsrender": ">= 1.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "http-server": "^14.1.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jquery": "^3.7.0",
+    "jsrender": "^1.0.10",
+    "terser": "^5.19.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "terser jquery.infiniteScrollWithTemplate.js -o jquery.infiniteScrollWithTemplate.min.js -c -m",
+    "minify": "npm run build",
+    "dev": "http-server . -p 8080 -o /examples/index.html",
+    "serve": "http-server . -p 8080"
   },
   "license": "MIT",
   "bugs": {

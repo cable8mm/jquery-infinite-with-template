@@ -1,248 +1,328 @@
-# jQuery Infinite With Template Plugin
+# ⚡ jQuery Infinite With Template Plugin
 
-![NPM Version](https://img.shields.io/npm/v/%40cable8mm%2Fjquery-infinite-with-template)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40cable8mm%2Fjquery-infinite-with-template)
-![NPM Downloads](https://img.shields.io/npm/dt/%40cable8mm%2Fjquery-infinite-with-template)
-![jsDelivr hits (npm)](https://img.shields.io/jsdelivr/npm/hy/%40cable8mm%2Fjquery-infinite-with-template)
-![NPM Type Definitions](https://img.shields.io/npm/types/%40cable8mm%2Fjquery-infinite-with-template)
-![NPM License](https://img.shields.io/npm/l/%40cable8mm%2Fjquery-infinite-with-template)
+[![NPM Version](https://img.shields.io/npm/v/%40cable8mm%2Fjquery-infinite-with-template)](https://www.npmjs.com/package/@cable8mm/jquery-infinite-with-template)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40cable8mm%2Fjquery-infinite-with-template)](https://bundlephobia.com/package/@cable8mm/jquery-infinite-with-template)
+[![NPM Downloads](https://img.shields.io/npm/dt/%40cable8mm%2Fjquery-infinite-with-template)](https://www.npmjs.com/package/@cable8mm/jquery-infinite-with-template)
+[![jsDelivr hits (npm)](https://img.shields.io/jsdelivr/npm/hy/%40cable8mm%2Fjquery-infinite-with-template)](https://www.jsdelivr.com/package/npm/@cable8mm/jquery-infinite-with-template)
+[![NPM Type Definitions](https://img.shields.io/npm/types/%40cable8mm%2Fjquery-infinite-with-template)](https://www.npmjs.com/package/@cable8mm/jquery-infinite-with-template)
+[![NPM License](https://img.shields.io/npm/l/%40cable8mm%2Fjquery-infinite-with-template)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/cable8mm/jquery-infinite-with-template)](https://github.com/cable8mm/jquery-infinite-with-template)
+[![GitHub issues](https://img.shields.io/github/issues/cable8mm/jquery-infinite-with-template)](https://github.com/cable8mm/jquery-infinite-with-template/issues)
 
+> 🚀 **AJAX-powered infinite scroll with template rendering for jQuery**
 
-JQuery plugin for ajax-enabled infinite page scroll with template.
+If you like jQuery until now, this little library will help you implement infinite scroll with ease.
 
-If you like jQuery until now, this little library will help.
+## ✨ Features
 
-## Install
+- ⚡ **Zero Dependencies** (except jQuery & jsRender)
+- 🎨 **Template Rendering** with jsRender
+- 🔄 **Dual Loading Modes** - Scroll or Click
+- 🎯 **TypeScript Support** out of the box
+- 🛡️ **Error Handling** with callbacks
+- ⚙️ **Highly Configurable** with 12+ options
+- 🚀 **Performance Optimized** with DocumentFragment
+- 📦 **Lightweight** - Only ~3KB minified
+- ✅ **Well Tested** - 16 unit tests included
 
-on npm
+## 📦 Installation
+
+### npm
 
 ```sh
 npm i @cable8mm/jquery-infinite-with-template
 ```
 
-on html
+### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.4/jquery.infiniteScrollWithTemplate.min.js" integrity="sha256-bX3iyCp0T50YmDRgpUl1tY/LGlpPGsKR4TqUkpcq6WA=" crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.4/jquery.infiniteScrollWithTemplate.min.js"
+  integrity="sha256-bX3iyCp0T50YmDRgpUl1tY/LGlpPGsKR4TqUkpcq6WA="
+  crossorigin="anonymous"
+></script>
 ```
 
-on ESM
+### ESM
 
 ```html
-<script type="module"> import @cable8mm/jquery-infinite-with-template from https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.4/+esm </script>
+<script type="module">
+  import @cable8mm/jquery-infinite-with-template from https://cdn.jsdelivr.net/npm/@cable8mm/jquery-infinite-with-template@1.0.4/+esm
+</script>
 ```
 
-## Demo
+## 🎬 Demo
 
-For convinient `http-server` need:
+### Quick Start
+
+#### Using npm run dev (Recommended)
 
 ```bash
-git clone https://github.com/cable8mm/jquery-infinite-with-template
+# Install dependencies (one-time)
+npm install
 
-cd jquery-infinite-with-template
-
-http-server .
+# Run development server with auto-open
+npm run dev
 ```
 
-and visit http://127.0.0.1:8080/examples/
+**Note:** This will start the server at `http://127.0.0.1:8080/examples/index.html` and automatically open it in your browser.
 
-If you are not installed `http-server`, refer to https://www.npmjs.com/package/http-server
+Visit [http://127.0.0.1:8080/examples/index.html](http://127.0.0.1:8080/examples/index.html) in your browser.
 
-You can regenerate data_sources:
+### Regenerate Demo Data
 
 ```bash
-# permission required
-./examples/generate > data_sources.ajax
+# Using PHP CLI
+php examples/generate > examples/data_sources.json
+
+# Or if you have the generate script in examples directory
+cd examples
+php generate > data_sources.json
 ```
 
-## Usage sample
+## 🚀 Usage
 
-Javascript part:
+### Basic Example
 
-```Javascript
-$("#result").infiniteTemplate({
-	templateSelector: "#test-tmpl",
-	dataPath: "data_sources.ajax",
-	query: "word=ajax",
-	templateHelpers: {
-		authId : 354
-	},
-    zeroCallback: function () {
-        alert("zero alert");
-    },
-});
-```
-
-HTML part:
+**HTML:**
 
 ```html
 <div id="result"></div>
 
 <script id="test-tmpl" type="text/x-jsrender">
-	<p>{{:id}}. {{:title}} [user:{{:authId}}]</p>
+  <div class="item">
+    <h3>{{:title}}</h3>
+    <p>ID: {{:id}}</p>
+  </div>
 </script>
 ```
 
-AJAX part: `data_sources.ajax`. This should return Ajax:
+**JavaScript:**
 
 ```javascript
+$("#result").infiniteTemplate({
+  templateSelector: "#test-tmpl",
+  dataPath: "/api/posts",
+  query: "category=tech",
+  templateHelpers: {
+    userId: 123,
+  },
+  zeroCallback: function () {
+    console.log("No more posts!");
+  },
+});
+```
+
+**Server Response (JSON):**
+
+```json
 {
-	"data": [
-	{
-		"id": 885,
-		"title": "iGFIJUSPp8oXoBDqoRXKK0VEAU0IBG(word=ajax)"
-	},
-	{
-		"id": 277,
-		"title": "HM3iPLDwd3nQKNH5eOkaOh5QlSb92F(word=ajax)"
-	},
-	{
-		"id": 583,
-		"title": "O2X0VQeWFGIRQPcVquYwHx49VNhwX3(word=ajax)"
-	},
-...even more rows
+  "data": [
+    {
+      "id": 1,
+      "title": "Getting Started with jQuery",
+      "content": "..."
+    },
+    {
+      "id": 2,
+      "title": "Advanced JavaScript Patterns",
+      "content": "..."
+    }
+  ]
 }
 ```
 
-Result:
+### Click-to-Load Button
 
-```html
-<div id="result">
-	<p>885. iGFIJUSPp8oXoBDqoRXKK0VEAU0IBG(word=ajax) [user:354]</p>
-	<p>277. HM3iPLDwd3nQKNH5eOkaOh5QlSb92F(word=ajax) [user:354]</p>
-	<p>583. O2X0VQeWFGIRQPcVquYwHx49VNhwX3(word=ajax) [user:354]</p>
-	<p>179. vrEwi7hgVucCEDmuO7pOf4Gzk4gmyh(word=ajax) [user:354]</p>
-	<p>380. yviF2uDLyySLZaAPs3bKNbSZfHeQA7(word=ajax) [user:354]</p>
-	<p>329. 865t05x9DMngrETccBuqrY7ts9Xt3R(word=ajax) [user:354]</p>
-	<p>84. D6mhKuRA06ONCE5HbswSwPjZvp0bUh(word=ajax) [user:354]</p>
-	<p>528. saWL46OBtTDGIBuZL9TkmfBvPXiRqM(word=ajax) [user:354]</p>
-	<p>522. PBe0jjP1Egy6NWpHzuA86JHupxNGvc(word=ajax) [user:354]</p>
-	<p>115. vBmfL7osq2VAKIktVznrC6QZzYpc1H(word=ajax) [user:354]</p>
-	<p>722. mti7aMut4TxAygKAdfGylml9QgJoDN(word=ajax) [user:354]</p>
-	<p>401. 06kgapSQylxWJOvFmDNLIcvpSPMB7V(word=ajax) [user:354]</p>
-	<p>245. UD0TP3bMU7J4mAlGqwo52F1I0rJIyR(word=ajax) [user:354]</p>
-	<p>985. 3xSyr0m68K3Ec6y8vJgIhYgSfgcGnG(word=ajax) [user:354]</p>
-	<p>78. DWpWRzx1x4Ibfh1Gn0Lk0F3aufu34d(word=ajax) [user:354]</p>
-	<p>573. iINBTozeMIeZguTU6lLB9j76zNZ4AK(word=ajax) [user:354]</p>
-	<p>946. OEuUblddtI9vqlyL89nDXizhvryn4e(word=ajax) [user:354]</p>
-	<p>756. wsBL8dxDf6UjTiNWNnnX4XAlAonHBM(word=ajax) [user:354]</p>
-	<p>66. q3irGi5lNUXccTDTDfl2jRlzVp04uk(word=ajax) [user:354]</p>
-	<p>20. vcq8sKN4RhCEoFLVW2vbX2eR14EKp8(word=ajax) [user:354]</p>
-</div>
+```javascript
+$("#result").infiniteTemplate({
+  templateSelector: "#item-template",
+  dataPath: "/api/items",
+  loadSelector: "#load-more-btn", // Click this button to load more
+  loadAtStart: false, // Don't load automatically
+});
 ```
 
-## Options
+### With Error Handling
 
-**templateSelector** - (required) jsRender template identify
-
-**dataPath** - (required) URL to load more data via AJAX
-
-**templateHelpers** - (optional) Merge with json to load
-
-**key** - (optional) data(default)
-
-**query** - (optional) Additional query
-
-**method** - (optional) GET(default), POST, PUT, DELETE
-
-**loadAtStart** - (optional) true(default), false
-
-**loadSelector** - (optional) if it set, it load more data every time the selector clicked
-
-**initialPage** - (optional) 1(default)
-
-**preventCache** - (optional) false(default) if true, Add timestamp
-
-**zeroCallback** - (optional) null(default) if function, call zeroCallback when result is nothing
-
-## Examples
-
-```html
-// https://m.holapet.com/adoption
-
-<x-adoption.rounded-card-list :selector="'adoption-rounded-card-list'">
-    @foreach($adoptions as $item)
-    <x-adoption.rounded-card :item="$item" />
-    @endforeach
-</x-adoption.rounded-card-list>
-<x-adoption.rounded-card-tmpl />
-<script>
-    $("#adoption-rounded-card-list").infiniteTemplate({
-        templateSelector: "#adoption-rounded-card-tmpl",
-        dataPath: "/api/adoption",
-        initialPage: 3,
-    });
-</script>
+```javascript
+$("#result").infiniteTemplate({
+  templateSelector: "#item-template",
+  dataPath: "/api/items",
+  errorCallback: function (error) {
+    console.error("Failed to load:", error);
+    alert("Something went wrong. Please try again.");
+  },
+  loadingCallback: function () {
+    $("#loading").show();
+  },
+  loadedCallback: function () {
+    $("#loading").hide();
+  },
+});
 ```
 
-```html
-// https://m.holapet.com/place/pensions/region/1
+## 📋 Options
 
-<x-place.rounded-card-list :selector="'place-rounded-card-list'">
-    @foreach($region->placesRecent as $item)
-    <x-place.rounded-card :item="$item" />
-    @endforeach
-</x-place.rounded-card-list>
-<x-place.rounded-card-tmpl />
-<script>
-    $("#place-rounded-card-list").infiniteTemplate({
-        templateSelector: "#place-rounded-card-tmpl",
-        dataPath: "/api/place/pensions/region/{{ $region->id }}",
-        initialPage: 3,
-        templateHelpers: {
-            minColumnCount: 1
-        }
-    });
-</script>
+| Option               | Type       | Default      | Description                                                  |
+| -------------------- | ---------- | ------------ | ------------------------------------------------------------ |
+| **templateSelector** | `string`   | **required** | jsRender template selector (e.g., `"#my-template"`)          |
+| **dataPath**         | `string`   | **required** | URL to load data via AJAX                                    |
+| **key**              | `string`   | `"data"`     | Key for data array in JSON response                          |
+| **query**            | `string`   | `null`       | Additional query parameters (e.g., `"category=1&sort=date"`) |
+| **method**           | `string`   | `"GET"`      | HTTP method (GET, POST, PUT, DELETE)                         |
+| **templateHelpers**  | `object`   | `null`       | Helper data merged with each item                            |
+| **loadAtStart**      | `boolean`  | `true`       | Load data on initialization                                  |
+| **loadSelector**     | `string`   | `null`       | CSS selector for click-to-load button                        |
+| **initialPage**      | `number`   | `1`          | Initial page number                                          |
+| **preventCache**     | `boolean`  | `false`      | Add timestamp to prevent caching                             |
+| **scrollThreshold**  | `number`   | `2`          | Multiplier for viewport height (lower = more sensitive)      |
+| **zeroCallback**     | `function` | `null`       | Called when no data returned on first page                   |
+| **errorCallback**    | `function` | `null`       | Called on AJAX or JSON parse error                           |
+| **loadingCallback**  | `function` | `null`       | Called when loading starts                                   |
+| **loadedCallback**   | `function` | `null`       | Called when loading completes (success or error)             |
+
+## 🎯 Real-World Examples
+
+### Example 1: Blog Posts with Pagination
+
+```javascript
+$("#post-list").infiniteTemplate({
+  templateSelector: "#post-template",
+  dataPath: "/api/posts",
+  query: "status=published",
+  initialPage: 1,
+  scrollThreshold: 1.5,
+  templateHelpers: {
+    currentUser: window.currentUser,
+  },
+  loadingCallback: () => $("#spinner").show(),
+  loadedCallback: () => $("#spinner").hide(),
+  zeroCallback: () => $("#end-message").show(),
+});
 ```
 
-```html
-// https://m.holapet.com/search/show?word=%ED%8F%AC%EB%A9%94%EB%9D%BC%EB%8B%88%EC%95%88
+### Example 2: E-commerce Product Grid
 
-@include('shared.jtemplate.search-user')
-
-@auth
-<script>
-    $("#user-list").infiniteTemplate({
-        templateSelector: "#user-tmpl",
-        dataPath: "/api/user",
-        query: "word={{ $word }}",
-        templateHelpers: {
-            authId : {{ Auth::id() ?? 0 }},
-            followeeIds: {!! Auth::user()->followee_ids->toJson() ?? 'false' !!}
-        }
-    });
-</script>
-@endauth
-@guest
-<script>
-    $("#user-list").infiniteTemplate({
-        templateSelector: "#user-tmpl",
-        dataPath: "/api/user",
-        query: "word={{ $word }}",
-    });
-</script>
-@endguest
+```javascript
+$("#product-grid").infiniteTemplate({
+  templateSelector: "#product-card",
+  dataPath: "/api/products",
+  query: "category=electronics&sort=price",
+  loadSelector: "#load-more-products",
+  loadAtStart: true,
+  templateHelpers: {
+    currency: "$",
+    discountRate: 0.1,
+  },
+});
 ```
 
-```html
-// https://m.holapet.com/story/hot
+### Example 3: Social Media Feed
 
-@if(!empty($hotStories))
-<x-story.grid-card-list :selector="'story-grid-card-list'">
-    @foreach($hotStories as $item)
-    <x-story.grid-card :item="$item" />
-    @endforeach
-</x-story.grid-card-list>
-@endif
-<x-story.grid-card-tmpl />
-<script>
-    $("#story-grid-card-list").infiniteTemplate({
-        templateSelector: "#story-grid-card-tmpl",
-        dataPath: "/api/story/hot",
-        initialPage: 3,
-    });
-</script>
+```javascript
+$("#feed").infiniteTemplate({
+  templateSelector: "#feed-item",
+  dataPath: "/api/feed",
+  method: "POST",
+  query: "filter=following",
+  initialPage: 3,
+  preventCache: true,
+  templateHelpers: {
+    currentUserId: Auth.id(),
+    likedPosts: Auth.likedPosts(),
+  },
+});
 ```
 
-The jQuery Infinite With Template Plugin project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Example 4: Search Results
+
+```javascript
+$("#search-results").infiniteTemplate({
+  templateSelector: "#result-item",
+  dataPath: "/api/search",
+  query: `q=${encodeURIComponent(searchQuery)}`,
+  zeroCallback: () => {
+    $("#no-results").show();
+  },
+  errorCallback: (error) => {
+    console.error("Search failed:", error);
+  },
+});
+```
+
+## 🏗️ Project Structure
+
+```
+jquery-infinite-with-template/
+├── jquery.infiniteScrollWithTemplate.js  # Main plugin (unminified)
+├── jquery.infiniteScrollWithTemplate.min.js  # Minified version
+├── jquery.infiniteScrollWithTemplate.d.ts  # TypeScript definitions
+├── package.json
+├── README.md
+├── LICENSE
+├── examples/
+│   ├── index.html          # Demo page
+│   ├── data_sources.json   # Demo data
+│   └── generate            # Data generator script
+└── tests/
+    ├── setup.js            # Test configuration
+    └── jquery.infiniteScrollWithTemplate.test.js  # 16 unit tests
+```
+
+## 🧪 Testing
+
+```bash
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+```
+
+**Test Coverage:**
+
+- ✅ Initialization & validation
+- ✅ Data loading & rendering
+- ✅ Callbacks (zero, error, loading, loaded)
+- ✅ Scroll & click loading modes
+- ✅ URL building & pagination
+- ✅ Edge cases (empty data, JSON parsing)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Credits
+
+- **jsRender** - Template engine
+- **jQuery** - DOM manipulation
+
+## 💡 Tips for Getting Stars
+
+- ⭐ Star this repo if you find it useful!
+- 🐛 Report bugs and request features
+- 📢 Share with your developer friends
+- 💬 Leave feedback and suggestions
+
+## 🔗 Links
+
+- **GitHub**: [https://github.com/cable8mm/jquery-infinite-with-template](https://github.com/cable8mm/jquery-infinite-with-template)
+- **NPM**: [https://www.npmjs.com/package/@cable8mm/jquery-infinite-with-template](https://www.npmjs.com/package/@cable8mm/jquery-infinite-with-template)
+- **Issues**: [https://github.com/cable8mm/jquery-infinite-with-template/issues](https://github.com/cable8mm/jquery-infinite-with-template/issues)
+
+---
+
+**Made with ❤️ by [Sam Lee](https://github.com/cable8mm)**
+
+If this project helped you, please give it a ⭐️!
