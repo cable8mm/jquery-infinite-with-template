@@ -18,13 +18,15 @@
     var currentScrollPage = opts.initialPage;
     var scrollTriggered = false;
     var isFinished = false;
+    var namespace =
+      ".infiniteTemplate_" + Math.random().toString(36).substr(2, 9);
 
     if (opts.loadSelector) {
-      $(document).on("click", opts.loadSelector, function () {
+      $(document).on("click" + namespace, opts.loadSelector, function () {
         triggerDataLoad();
       });
     } else {
-      $(window).on("scroll", function () {
+      $(window).on("scroll" + namespace, function () {
         if (
           $(this).scrollTop() >
             $(document.body).height() - $(this).height() * 2 &&
@@ -53,7 +55,16 @@
         method: opts.method,
         success: function (result) {
           if (typeof result === "string") {
-            result = JSON.parse(result);
+            try {
+              result = JSON.parse(result);
+            } catch (e) {
+              console.error("JSON parse error:", e);
+              scrollTriggered = false;
+              if (typeof opts.errorCallback === "function") {
+                opts.errorCallback(e);
+              }
+              return;
+            }
           }
 
           if (result) {
@@ -61,7 +72,6 @@
               isFinished = true;
 
               // if zero, call zeroCallback
-              console.log(currentScrollPage + " " + opts.zeroCallback);
               if (
                 currentScrollPage == 1 &&
                 typeof opts.zeroCallback === "function"
@@ -83,6 +93,13 @@
           }
 
           scrollTriggered = false;
+        },
+        error: function (xhr, status, error) {
+          scrollTriggered = false;
+          console.error("AJAX error:", status, error);
+          if (typeof opts.errorCallback === "function") {
+            opts.errorCallback(error);
+          }
         },
       });
     }
@@ -107,5 +124,6 @@
     initialPage: 1,
     preventCache: false,
     zeroCallback: null,
+    errorCallback: null,
   };
 })(jQuery);
