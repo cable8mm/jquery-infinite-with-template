@@ -128,7 +128,27 @@
     }
 
     function buildUrl(baseUrl, page) {
-      var url = new URL(baseUrl, window.location.origin);
+      var url;
+
+      // Check if baseUrl is absolute or relative
+      if (
+        baseUrl.indexOf("http://") === 0 ||
+        baseUrl.indexOf("https://") === 0
+      ) {
+        // Absolute URL
+        url = new URL(baseUrl);
+      } else if (window.location && window.location.href) {
+        // Resolve relative URLs from the current page's directory
+        var basePath = window.location.href.substring(
+          0,
+          window.location.href.lastIndexOf("/") + 1,
+        );
+        url = new URL(baseUrl, basePath);
+      } else {
+        // Fallback: treat as relative to root
+        url = new URL(baseUrl, "http://localhost/");
+      }
+
       url.searchParams.set("page", page);
 
       if (opts.query) {
