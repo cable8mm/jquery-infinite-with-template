@@ -3,7 +3,7 @@
 
 /**
  * jQuery Infinite With Template - Demo Data Generator
- * 
+ *
  * @example ./generate > data_sources.json
  * @description Generates random demo data for testing infinite scroll
  */
@@ -26,7 +26,7 @@ $response = [
 ];
 
 // Generate 20 items per page
-$itemsPerPage = 20;
+$itemsPerPage = 30;
 for ($i = 0; $i < $itemsPerPage; $i++) {
     $response['data'][] = generateItem($query, $response['page'], $i);
 }
@@ -36,7 +36,7 @@ echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
 /**
  * Generate a single fake item
- * 
+ *
  * @param string $query Search query
  * @param int $page Current page number
  * @param int $index Item index within page
@@ -45,14 +45,14 @@ echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 function generateItem($query, $page, $index)
 {
     static $usedIds = [];
-    
+
     // Generate unique ID
     do {
         $id = rand(1, 10000);
     } while (in_array($id, $usedIds));
-    
+
     $usedIds[] = $id;
-    
+
     return [
         'id' => $id,
         'title' => generateRandomString(30) . "(word=$query, page=$page)",
@@ -63,7 +63,7 @@ function generateItem($query, $page, $index)
 
 /**
  * Generate random string of specified length
- * 
+ *
  * @param int $length String length
  * @return string Random string
  */
@@ -72,10 +72,10 @@ function generateRandomString($length = 10)
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
-    
+
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
-    
+
     return $randomString;
 }
