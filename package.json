@@ -20,16 +20,15 @@
     "url": "https://github.com/cable8mm"
   },
   "dependencies": {
-    "jsrender": ">= 1.0.0"
+    "jsrender": ">=1.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.0",
     "http-server": "^14.1.1",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "jquery": "^3.7.0",
-    "jsrender": "^1.0.10",
-    "terser": "^5.19.0"
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "jquery": "^4.0.0",
+    "jsrender": "^1.2.0",
+    "terser": "^5.50.0"
   },
   "scripts": {
     "test": "jest",
@@ -43,5 +42,9 @@
   "bugs": {
     "url": "https://github.com/cable8mm/jquery-infinite-with-template/issues"
   },
-  "homepage": "https://github.com/cable8mm/jquery-infinite-with-template#readme"
+  "homepage": "https://github.com/cable8mm/jquery-infinite-with-template#readme",
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.12.2": true
+  }
 }
