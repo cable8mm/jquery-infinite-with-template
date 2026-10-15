@@ -2,6 +2,16 @@ name: Publish to npm
 on:
   release:
     types: [created]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to publish (without the v prefix)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   build:
@@ -12,13 +22,16 @@ jobs:
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
 
       - name: Update version
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
           npm version $VERSION --no-git-tag-version
 
-      - run: npm install
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm ci
+      - run: npm publish --access public
