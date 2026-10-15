@@ -34,4 +34,4 @@ jobs:
           npm version $VERSION --no-git-tag-version
 
       - run: npm ci
-      - run: npm stage publish --access public
+      - run: npm publish --access public
